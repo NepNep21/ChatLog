@@ -46,7 +46,7 @@ public class ChatLog implements ClientModInitializer {
 
 	public static void handle(Text text) {
 		final String date = new Date().toString();
-		final String log = String.format("logs/chat-log-%s.log", date).replace(" ", "-");
+		final String log = String.format("logs/chat-log-%s.log", date).replaceAll("\\s|:", "-");
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(log, true))) {
 			writer.append(date + " " + text.getString());
 			writer.newLine();
