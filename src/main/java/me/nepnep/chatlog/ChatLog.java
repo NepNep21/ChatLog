@@ -21,6 +21,8 @@ public class ChatLog implements ClientModInitializer {
 	private static String webhookName;
 	private static String webhookAvatar;
 	private static WebhookClient webhook;
+	private static final String DATE = new Date().toString();
+	private static final String LOG = String.format("logs/chat-log-%s.log", DATE).replaceAll("\\s|:", "-");
 
 	@Override
 	public void onInitializeClient() {
@@ -45,10 +47,8 @@ public class ChatLog implements ClientModInitializer {
 	}
 
 	public static void handle(Text text) {
-		final String date = new Date().toString();
-		final String log = String.format("logs/chat-log-%s.log", date).replaceAll("\\s|:", "-");
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(log, true))) {
-			writer.append(date + " " + text.getString());
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(LOG, true))) {
+			writer.append(new Date().toString() + " " + text.getString());
 			writer.newLine();
 		} catch (IOException e) {
 			LogManager.getLogger("ChatLog").error("IOException at ChatLog.handle()", e);
