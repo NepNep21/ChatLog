@@ -1,7 +1,7 @@
 # ChatLog
 A simple minecraft fabric 1.16.x mod for logging chat to a separate file and optionally a discord webhook
 
-#Things to note
+Things to note:
 
 The mod requires cloth-config  
 The mod DOES NOT require fabric api  
