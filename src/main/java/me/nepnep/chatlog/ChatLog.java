@@ -48,7 +48,7 @@ public class ChatLog implements ClientModInitializer {
 
 	public static void handle(Text text) {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(LOG, true))) {
-			writer.append(new Date().toString() + " " + text.getString());
+			writer.append(new Date() + " " + text.getString());
 			writer.newLine();
 		} catch (IOException e) {
 			LogManager.getLogger("ChatLog").error("IOException at ChatLog.handle()", e);

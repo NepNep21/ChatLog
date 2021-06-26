@@ -6,10 +6,10 @@
   "name": "ChatLog",
   "description": "A simple minecraft mod for logging chat to a separate file and optionally a discord webhook",
   "authors": [
-    "Nep Nep#3025/Lolicon2110"
+    "Nep Nep#3025/NepNep21"
   ],
   "contact": {
-    "sources": "https://github.com/Lolicon2110/ChatLog"
+    "sources": "https://github.com/NepNep21/ChatLog"
   },
 
   "license": "MIT",
@@ -26,8 +26,8 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.7.4",
-    "minecraft": "1.16.x",
-    "cloth-config2": ">=4.11.19"
+    "fabricloader": ">=0.11.3",
+    "minecraft": "1.17.x",
+    "java": ">=16"
   }
 }
