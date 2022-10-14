@@ -15,14 +15,14 @@ import java.io.IOException;
 import java.util.Date;
 
 public class ChatLog implements ClientModInitializer {
-
 	private static boolean useWebhook;
-	private static String webhookUrl;
 	private static String webhookName;
 	private static String webhookAvatar;
 	private static WebhookClient webhook;
 	private static final String DATE = new Date().toString();
 	private static final String LOG = String.format("logs/chat-log-%s.log", DATE).replaceAll("\\s|:", "-");
+	
+	private static BufferedWriter write = null;
 
 	@Override
 	public void onInitializeClient() {
@@ -30,7 +30,7 @@ public class ChatLog implements ClientModInitializer {
 		WebhookConfig config = AutoConfig.getConfigHolder(WebhookConfig.class).getConfig();
 
 		useWebhook = config.useWebhook;
-		webhookUrl = config.webHookUrl;
+		String webhookUrl = config.webHookUrl;
 		webhookName = config.webhookName;
 		webhookAvatar = config.webhookAvatar;
 
@@ -47,9 +47,13 @@ public class ChatLog implements ClientModInitializer {
 	}
 
 	public static void handle(Text text) {
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(LOG, true))) {
-			writer.append(new Date() + " " + text.getString());
-			writer.newLine();
+		try {
+			if (write == null) {
+				write = new BufferedWriter(new FileWriter(LOG, true));
+			}
+			write.append(new Date() + " " + text.getString());
+			write.newLine();
+			write.flush();
 		} catch (IOException e) {
 			LogManager.getLogger("ChatLog").error("IOException at ChatLog.handle()", e);
 		}
